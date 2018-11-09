@@ -1,0 +1,8 @@
+{
+  "name": "Stumped",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "c7e359c3"
+}

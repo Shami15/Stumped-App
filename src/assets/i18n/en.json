@@ -1,0 +1,74 @@
+{
+	"home": {
+		"home": "Home",
+		"all": "ALL CLASSES",
+		"my": "MY CLASSES"
+	},
+
+	"add" : {
+		"add" : "Add Class",
+		"create" : "CREATE CLASS",
+		"join" : "JOIN CLASS",
+		"name" : "Name",
+		"subject" : "Subject",
+		"students" : "Students",
+		"id" : "Class ID"	
+	},
+
+	"class" : {
+		"no" : "No questions have been asked yet",
+		"be" : "BE THE FIRST",
+		"A" : "ANSWERED",
+		"U" : "UNANSWERED"
+	},
+
+	"subject" : "Subject",
+	"by" : "By",
+
+	"info" : {
+		"leave" : "Leave Class",
+		"add" : "Add Student",
+		"edit" : "Edit Class"
+	},
+
+	"post" : {
+		"new" : "New Question",
+		"com" : "New Comment",
+		"post" : "POST"
+		
+	},
+
+	"input" : "Whats your input?",
+	"quest" : "Question",
+
+	"user" : {
+		"wel" : "Welcome",
+		"edit" : "Edit User",
+		"log" : "Logout",
+		"lang" : "Language"
+	},
+
+	"lang" : {
+		"en" : "English",
+		"sp" : "Spanish",
+		"fr" : "French",
+		"ch" : "Chinese"
+	},
+
+	"login" : {
+		"login" : "Login",
+		"sign" : "Sign Up",
+		"uN" : "User Name",
+		"pass" : "Password",
+		"reg" : "not registered?",
+		"cre" : "create an account",
+		"email" : "Email",
+		"fN" : "First Name",
+		"lN" : "Last Name",
+		"passC" : "Password Confirm"
+
+	}
+
+
+	
+}

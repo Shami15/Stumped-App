@@ -1,0 +1,38 @@
+<ion-menu [content]="content">
+
+  <ion-header padding>
+    <!-- <ion-toolbar>
+      <ion-title>User</ion-title>
+    </ion-toolbar> -->
+    <h3>{{ 'user.wel' | translate }} {{this.user?.fName}} {{this.user?.lName}}</h3>
+    <p>@{{this.user?.userName}}</p>
+
+  </ion-header>
+
+  <ion-content>
+
+    <!-- <button round ion-button>Edit User</button> <br>
+      <button round color="danger" ion-button menuToggle (click)='logout()'>LOGOUT</button> -->
+    <!-- <ion-item>
+      <button block ion-button (click)="edit();">{{ 'user.edit' | translate }}</button></ion-item> -->
+    <ion-item>
+      <ion-label>{{ 'user.lang' | translate }}</ion-label>
+      <!-- <ion-select [(ngModel)]="lang" (ionChange)='changeLanguage($event)'>
+        <ion-option value="en">English</ion-option>
+        <ion-option value="sp">Spanish</ion-option>
+        <ion-option value="fr">French</ion-option>
+        <ion-option value="ch">Chinese</ion-option>
+      </ion-select> -->
+      <ion-select [(ngModel)]="lang" (ionChange)='changeLanguage($event)'>
+          <ion-option value="en">English</ion-option>
+          <ion-option value="sp">Spanish</ion-option>
+          <ion-option value="fr">French</ion-option>
+          <ion-option value="ch">Chinese</ion-option>
+        </ion-select>
+    </ion-item>
+    <button block color="danger" ion-button menuToggle (click)='logout()'>{{ 'user.log' | translate }}</button>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>

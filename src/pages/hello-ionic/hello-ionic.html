@@ -1,0 +1,86 @@
+<ion-header no-border>
+  <ion-navbar color='primary'>
+    <ion-title> {{ 'home.home' | translate }} </ion-title>
+    <button ion-button menuToggle left>
+      <ion-icon name="contact"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <!-- <h3 class='titles'>My Classes</h3> -->
+  <ion-segment [(ngModel)]="state" color="primary">
+    <ion-segment-button value="u">
+      {{ 'home.all' | translate }}
+    </ion-segment-button>
+    <ion-segment-button value="a">
+      {{ 'home.my' | translate }}
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="this.state == 'u'">
+    <div *ngFor="let item of data | async">
+      <ion-card (click)="goToClass(item)" *ngIf="item.teacher !== user.userName">
+        <img src="../../assets/imgs/stump-min.png">
+        <!-- <ion-item>
+      <ion-avatar item-start>
+        <ion-icon name="contact"></ion-icon>
+      </ion-avatar>
+      <h2>{{item?.name}}</h2>
+      <p>{{item?.subject}}</p>
+    </ion-item> -->
+        <ion-card-content>
+          <ion-card-title>{{item?.name}}</ion-card-title>
+          <h2>{{item?.subject}}</h2>
+        </ion-card-content>
+
+      </ion-card>
+    </div>
+  </div>
+
+  <div *ngIf="this.state == 'a'">
+    <div *ngFor="let item of data | async">
+      <ion-card (click)="goToClass(item)" *ngIf="item.teacher == user.userName">
+
+        <img src="../../assets/imgs/stump-min.png">
+        <!-- <ion-avatar item-start>
+          <ion-icon name="contact"></ion-icon>
+        </ion-avatar> -->
+      <ion-card-content>
+        <ion-card-title>{{item?.name}}</ion-card-title>
+        <h2>{{item?.subject}}</h2></ion-card-content>
+
+      </ion-card>
+    </div>
+  </div>
+
+
+
+  <ion-fab bottom right>
+    <button ion-fab (click)="addClass()">
+      <ion-icon name="add-circle"></ion-icon>
+    </button>
+    <!-- <button ion-fab (click)="addClass()">DA TEXT</button> -->
+    <!-- <button ion-fab ><ion-icon name="add-circle" ></ion-icon></button>
+      <ion-fab-list >
+        <button ion-fab >New Class</button>
+        <button ion-fab >Join Class</button>
+      </ion-fab-list> -->
+  </ion-fab>
+
+  <!-- <ion-card *ngFor="let item of data | async">
+    <ion-item>
+      <ion-avatar item-start>
+        <ion-icon name="contact"></ion-icon>
+      </ion-avatar>
+      <h2>{{item.title.rendered}}</h2>
+      {{item?.content.rendered}}
+    </ion-item>
+    <img src="../../assets/imgs/plchldr.png">
+    <ion-card-content>
+      <p>Description of the problem</p>
+    </ion-card-content>
+  </ion-card> -->
+
+</ion-content>

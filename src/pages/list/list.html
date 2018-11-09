@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar color='primary'>
+    <!-- <ion-title>Change Password</ion-title> -->
+    <ion-title>Edit Class</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="edit" (ngSubmit)='editClass(this.edit)'>
+    <ion-item>
+      <ion-label>Class Name</ion-label>
+      <ion-input formControlName='name'> </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Subject</ion-label>
+      <ion-input formControlName='subject'> </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-input formControlName='name'> </ion-input>
+    </ion-item>
+
+    <button ion-button type='submit' block> Edit Class </button>
+
+  </form>
+
+  <!-- <form [formGroup]="form" (ngSubmit)="update(this.form)">
+        <ion-item>
+          <ion-title>Current Password</ion-title>
+          <ion-input formControlName="current"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-title>New Password</ion-title>
+          <ion-input formControlName="new"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-title>Confirm Password</ion-title>
+          <ion-input formControlName="confirm"></ion-input>
+        </ion-item>
+        <button block type='submit' ion-button >Update Password</button>
+      </form> -->
+</ion-content>

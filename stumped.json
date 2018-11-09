@@ -1,0 +1,49 @@
+{
+    "users": [
+        {
+            "id": "01",
+            "firstName": "John",
+            "lastName": "Doe",
+            "password": "password",
+            "email": "johnD@email.com",
+            "classes": [
+                {
+                    "id": "01"
+                }
+            ]
+        }
+    ],
+
+    "Class": [
+        {
+            "name": "Intro to Python Pragramming",
+            "teacher": "02",
+            "id": "01",
+            "students": [
+                {
+                    "id": "01"
+                }
+            ],
+            "subject": "Programming",
+            "questions": [
+                {
+                    "id": "01",
+                    "thumbnail": "",
+                    "topic": "Problem installing environment",
+                    "user": "01",
+                    "description": "stuff about python i guess",
+                    "comment": [
+                        {
+                            "user": "01",
+                            "id": "01",
+                            "text": "Uhhhh i got an Environment error how do i fix it?",
+                            "img": "",
+                            "video": "",
+                            "file": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

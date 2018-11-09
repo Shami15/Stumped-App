@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color='primary'>
+    <!-- <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
+    <ion-title>Add Student</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-item (click)='collapsible()'>
+    <ion-icon item-left *ngIf='!this.expand' name="add"></ion-icon>
+    <ion-icon item-left *ngIf='this.expand' name="remove"></ion-icon>
+   <ion-title>Students</ion-title></ion-item>
+   <div *ngIf='this.expand'>
+      <h6 padding *ngFor="let person of students">
+        {{person}}
+      </h6>
+    </div>
+   <ion-searchbar (ionInput)="onInput($event)" [debounce]='500'></ion-searchbar>
+   <ion-card *ngIf='this.searchVal?.userName' (click)='addUser();'>
+      <ion-row>
+        <ion-icon padding name="contact"></ion-icon>
+        <h1 padding>{{this.searchVal?.userName}}</h1>
+      </ion-row>
+    </ion-card>
+    <button block ion-button (click)='submitUsers();' >Add Students</button>
+</ion-content>

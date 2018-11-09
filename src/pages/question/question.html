@@ -1,0 +1,91 @@
+<!--
+  Generated template for the QuestionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='primary'>
+    <ion-title>Question</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <ion-item>
+    <ion-avatar item-start>
+      <ion-icon name="contact"></ion-icon>
+    </ion-avatar>
+    <div style="position:relative;">
+      <div style="float:right;margin:0 0 0 auto;">
+        <ion-icon *ngIf="this.user == this.Class.teacher || this.user == this.question.user" name="close" (click)="delete('Question',null)" ></ion-icon>
+      </div>
+      <h1>{{this.question.user}}</h1>
+      <h2><u>{{this.question.topic}}</u></h2>
+      <h1>{{this.question.description}}</h1>
+
+    </div>
+  </ion-item>
+
+  <div>
+    <button ion-button (click)="upVote()">
+      <ion-icon *ngIf='!this.like' name="star-outline">
+        <ion-badge item-end>{{this.question.votes.length}}</ion-badge>
+      </ion-icon>
+      <ion-icon *ngIf='this.like' name="star">
+        <ion-badge item-end>{{this.question.votes.length}}</ion-badge>
+      </ion-icon>
+    </button>
+    <button ion-button color="secondary" *ngIf='this.question.user == this.user && !this.question.answered' (click)='answered()'>
+      <ion-icon name="checkmark-circle"></ion-icon>
+    </button>
+    <button ion-button color="danger" *ngIf='this.question.user == this.user && this.question.answered' (click)='unclear()'>
+      <ion-icon name="help"></ion-icon>
+    </button>
+
+
+    <!-- <button ><ion-icon  padding name="text" >
+        </ion-icon></button>-->
+  </div>
+  <div *ngFor='let item of comments;'>
+    <ion-item>
+      <ion-avatar item-start>
+        <ion-icon name="contact"></ion-icon>
+      </ion-avatar>
+      <div style="position:relative;">
+        <div style="float:right;margin:0 0 0 auto;">
+          <ion-icon *ngIf="this.user == this.Class.teacher || this.user == this.question.user || this.user == item.user" name="close" (click)='delete("Comment",item)'></ion-icon>
+        </div></div>
+        <h1>{{item.user}}</h1>
+        <p>{{item.text}}</p>
+    </ion-item>
+    <div>
+      <!-- HERE!!! -->
+        <!-- <button ion-button (click)="upVote()">
+            <ion-icon name="star-outline">
+              <ion-badge item-end>{{item.votes.length}}</ion-badge>
+            </ion-icon>
+            <ion-icon name="star">
+              <ion-badge item-end>{{item.votes.length}}</ion-badge>
+            </ion-icon>
+          </button> -->
+
+
+      <!-- <button ion-button color="secondary" *ngIf='this.question.user == this.user'>
+          <ion-icon name="help"></ion-icon>
+        </button> -->
+    </div>
+  </div>
+
+</ion-content>
+<ion-footer>
+  <form [formGroup]="post" (ngSubmit)="postCom(this.post)">
+    <ion-icon name="contact"></ion-icon>
+    <ion-row>
+      <ion-item>
+        <ion-textarea class='text-box' placeholder='whats your input?' formControlName="description"></ion-textarea>
+      </ion-item>
+      <button ion-button type="submit" block [disabled]="!post.valid">POST</button>
+    </ion-row>
+  </form>
+</ion-footer>

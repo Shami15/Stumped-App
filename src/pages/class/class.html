@@ -1,0 +1,109 @@
+<!--
+  Generated template for the ClassPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='primary'>
+    <ion-row>
+      <ion-title>{{this.Class.name}}</ion-title>
+      <button ion-button (click)='showClass(this.Class);'>
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-row>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  <ion-segment *ngIf='this.questions.length !== 0 || this.questions == undefined' [(ngModel)]="state" color="primary">
+    <ion-segment-button value="u">
+      {{ 'class.U' | translate }}
+    </ion-segment-button>
+    <ion-segment-button value="a">
+      {{ 'class.A' | translate }}
+    </ion-segment-button>
+  </ion-segment>
+
+  <div padding *ngIf='this.questions.length == 0 || this.questions.length == undefined'>
+    <h3>{{ 'class.no' | translate }}</h3>
+    <button (click)="postComment(undefined)" ion-button>{{ 'class.be' | translate }}</button>
+  </div>
+
+  <div *ngIf="this.state == 'u'">
+    <div *ngFor='let item of questions'>
+      <div *ngIf='!item.answered'>
+        <ion-card>
+          <ion-item>
+            <div style="position:relative;">
+              <div style="float:right;margin:0 0 0 auto;">
+                <ion-icon *ngIf="this.user == this.Class.teacher || this.user == item.user" (click)='delete(item);' name="close"></ion-icon>
+              </div>
+            </div>
+            <div (click)="showQuestion(item)">
+              <ion-avatar item-start>
+                <ion-icon name="contact"></ion-icon>
+              </ion-avatar>
+
+              <h1>{{item.user}}</h1>
+              <h1>{{item.topic}}</h1>
+              <p>{{item.description}}</p>
+
+            </div>
+          </ion-item>
+
+
+          <!--ASK SOMEONE HOW TO DO DIS-->
+          <!-- <button ion-button (click)='upVote(item)'>
+            <ion-icon *ngIf='item.votes' name="star-outline">
+              <ion-badge item-end>{{item.votes.length}}</ion-badge>
+            </ion-icon>
+            <ion-icon *ngIf='item.votes' name="star">
+              <ion-badge item-end>{{item.votes.length}}</ion-badge> 
+            </ion-icon>
+          </button> -->
+          <button ion-button (click)="postComment(item)">
+            <ion-icon padding name="text">
+            </ion-icon>
+          </button>
+
+        </ion-card>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="this.state == 'a'">
+    <div *ngFor='let item of questions'>
+      <div *ngIf='item.answered'>
+        <ion-card>
+          <ion-item (click)="showQuestion(item)">
+            <ion-avatar item-start>
+              <ion-icon name="contact"></ion-icon>
+            </ion-avatar>
+            <h1>{{item.user}}</h1>
+            <h1>{{item.topic}}</h1>
+            <p>{{item.description}}</p>
+          </ion-item>
+          <!--ASK BHOLA HOW TO DO DIS-->
+          <!-- <button ion-button>
+            <ion-icon padding name="arrow-dropup-circle">
+              <ion-badge item-end>{{item.votes.length}}</ion-badge>
+            </ion-icon>
+          </button> -->
+          <button ion-button (click)="postComment(item)">
+            <ion-icon padding name="text">
+            </ion-icon>
+          </button>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+  <ion-fab right bottom>
+    <button ion-fab (click)="postComment(undefined)">
+      <ion-icon name="add-circle"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>
