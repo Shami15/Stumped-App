@@ -30,7 +30,8 @@ export class MyApp {
   // public user = this.ds.cred
   public user: any;
   public test = 'test string';
-  public lang : string = 'en'
+  // public lang = ['en','sp','fr','ch']
+  public lang = 'en';
 
   constructor(
     public platform: Platform,
@@ -46,7 +47,7 @@ export class MyApp {
   ) {
     
     this.initializeApp();
-    this.initTranslate();
+    this.initTranslate(); 
     event.subscribe('user : logged in', (user) => {
       this.user = user
       this.nav.setRoot(HelloIonicPage)
@@ -116,18 +117,22 @@ export class MyApp {
     initTranslate() {
       // Set the default language for translation strings, and the current language.
       this.translate.setDefaultLang('en');
+      this.ds.lang = 'en';
       if (this.translate.getBrowserLang() !== undefined) {
           this.translate.use(this.translate.getBrowserLang());
       } else {
           this.translate.use('en'); // Set your language here
       }
 
+    
+
   }
 
   public changeLanguage(language)
   {
-    console.log('CLICKED')
+    console.log(language)
     this.translate.use(language);
+    this.ds.lang = language 
   }
 
 

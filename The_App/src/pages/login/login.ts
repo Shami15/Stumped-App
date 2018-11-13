@@ -90,9 +90,10 @@ export class LoginPage {
   }
 
   public signup(user) {
+    let match = this.ds.translateFunc('match')
     //dis needs to change plzzzzz
     if(user.password !== user.passwordC){
-      this.ds.showToast('Passwords do not match')
+      this.ds.showToast(match)
     }else{
     this.showLoading()
     this.ds.register(user)

@@ -3,7 +3,7 @@
     <!-- <button menuToggle *ngIf="!selectedItem">
       <ion-icon name="menu"></ion-icon>
     </button> -->
-    <ion-title>Add Student</ion-title>
+    <ion-title>{{ 'info.add' | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
     <ion-item (click)='collapsible()'>
     <ion-icon item-left *ngIf='!this.expand' name="add"></ion-icon>
     <ion-icon item-left *ngIf='this.expand' name="remove"></ion-icon>
-   <ion-title>Students</ion-title></ion-item>
+   <ion-title>{{ 'add.students' | translate}}</ion-title></ion-item>
    <div *ngIf='this.expand'>
       <h6 padding *ngFor="let person of students">
         {{person}}
@@ -24,5 +24,5 @@
         <h1 padding>{{this.searchVal?.userName}}</h1>
       </ion-row>
     </ion-card>
-    <button block ion-button (click)='submitUsers();' >Add Students</button>
+    <button block ion-button (click)='submitUsers();' >{{ 'info.add' | translate}}</button>
 </ion-content>

@@ -8,6 +8,7 @@ import { userModel } from '../../app/models/users';
 import { ToastController, Events } from 'ionic-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
+import {TranslateService} from '@ngx-translate/core';
 
 /*
   Generated class for the DataServiceProvider provider.
@@ -19,6 +20,7 @@ import { Storage } from '@ionic/storage';
 export class DataServiceProvider {
   public frizbe: any;
   public saucer: any;
+  public lang : string;
 
   // rootUrl : string = "https://shammarlangaignecom.000webhostapp.com";
   rootUrl: string = "http://localhost:3000";
@@ -35,11 +37,10 @@ export class DataServiceProvider {
     password: "YAHYEET",
     fName: "Shammar",
     lName: "Langaigne",
-
   }];
   public cred: any;
   // file : string = 'pages';
-  constructor(public http: Http, public toastCtrl: ToastController, public event: Events, public storage: Storage) {
+  constructor(public http: Http, public toastCtrl: ToastController, public event: Events, public storage: Storage, public translate : TranslateService) {
     console.log('Hello DataServiceProvider Provider');
   }
 
@@ -202,6 +203,15 @@ export class DataServiceProvider {
 
   delete(body){
     return this.http.delete(`${this.rootUrl}/${this.file}/${body._id}`, JSON.stringify(body)).map(res => res.json())
+  }
+
+  translateFunc(param : string){
+    var yeild
+     this.translate.get(param).subscribe((res: string) => {
+      console.log(res);
+      yeild = res
+      });
+      return yeild
   }
 
 

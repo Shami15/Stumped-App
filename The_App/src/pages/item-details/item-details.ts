@@ -51,10 +51,13 @@ export class ItemDetailsPage {
   }
 
   presentAlert() {
+    let dup = this.ds.translateFunc('add.dup')
+    let sub = this.ds.translateFunc('add.sub')
+    let ok = this.ds.translateFunc('ok')
     let alert = this.alertCtrl.create({
-      title: 'Duplicate user',
-      subTitle: 'This user is already registered in this class',
-      buttons: ['OK']
+      title: dup,
+      subTitle: sub,
+      buttons: [ok]
     });
     alert.present();
   }

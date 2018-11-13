@@ -77,19 +77,23 @@ export class ClassPage {
   }
 
   delete(question) {
+    let rem = this.ds.translateFunc('class.remove');
+    let mess = this.ds.translateFunc('class.sure');
+    let yes = this.ds.translateFunc('yes');
+    let no = this.ds.translateFunc('no');
     let alert = this.alertCtrl.create({
-      title: 'Remove Question?',
-      message: 'Are you sure you want to remove this question?',
+      title: rem,
+      message: mess,
       buttons: [
         {
-          text: 'No',
+          text: no,
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Yes',
+          text: yes,
           handler: () => {
             _.remove(this.questions, question)
             console.log(this.questions)

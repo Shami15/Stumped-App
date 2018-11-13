@@ -12,23 +12,36 @@
 		"name" : "Name",
 		"subject" : "Subject",
 		"students" : "Students",
-		"id" : "Class ID"	
+		"id" : "Class ID",
+		"desc" : "Description",
+		"created" : "Class created ",
+		"joined" : "Joined class ",
+		"succ" : "succesfully",
+		"mess" : "Would you like to view the class?",
+		"dup" : "Duplicate User",
+		"sub" : "This user is already registered in this class"
 	},
 
 	"class" : {
 		"no" : "No questions have been asked yet",
 		"be" : "BE THE FIRST",
 		"A" : "ANSWERED",
-		"U" : "UNANSWERED"
+		"U" : "UNANSWERED",
+		"remove" : "Remove Question?",
+		"sure" : "Are you sure you want to remove this question?"
 	},
 
 	"subject" : "Subject",
 	"by" : "By",
+	"ok" : "Ok",
 
 	"info" : {
+		"id": "Class ID:",
 		"leave" : "Leave Class",
 		"add" : "Add Student",
-		"edit" : "Edit Class"
+		"edit" : "Edit Class",
+		"del" : " Delete Class",
+		"sure" : "Are you sure you want to leave this class?"
 	},
 
 	"post" : {
@@ -40,6 +53,8 @@
 
 	"input" : "Whats your input?",
 	"quest" : "Question",
+	"yes" : "Yes",
+	"no" : "No",
 
 	"user" : {
 		"wel" : "Welcome",
@@ -65,7 +80,9 @@
 		"email" : "Email",
 		"fN" : "First Name",
 		"lN" : "Last Name",
-		"passC" : "Password Confirm"
+		"passC" : "Password Confirm",
+		"aReg" : "already registered?",
+		"match" : "Passwords do not match"
 
 	}
 

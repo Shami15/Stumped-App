@@ -17,18 +17,13 @@
       <button block ion-button (click)="edit();">{{ 'user.edit' | translate }}</button></ion-item> -->
     <ion-item>
       <ion-label>{{ 'user.lang' | translate }}</ion-label>
-      <!-- <ion-select [(ngModel)]="lang" (ionChange)='changeLanguage($event)'>
-        <ion-option value="en">English</ion-option>
-        <ion-option value="sp">Spanish</ion-option>
-        <ion-option value="fr">French</ion-option>
-        <ion-option value="ch">Chinese</ion-option>
-      </ion-select> -->
+
       <ion-select [(ngModel)]="lang" (ionChange)='changeLanguage($event)'>
-          <ion-option value="en">English</ion-option>
-          <ion-option value="sp">Spanish</ion-option>
-          <ion-option value="fr">French</ion-option>
-          <ion-option value="ch">Chinese</ion-option>
-        </ion-select>
+        <ion-option value="en">{{ 'lang.en' | translate }}</ion-option>
+        <ion-option value="sp">{{ 'lang.sp' | translate }}</ion-option>
+        <ion-option value="fr">{{ 'lang.fr' | translate }}</ion-option>
+        <ion-option value="ch">{{ 'lang.ch' | translate }}</ion-option>
+      </ion-select>
     </ion-item>
     <button block color="danger" ion-button menuToggle (click)='logout()'>{{ 'user.log' | translate }}</button>
   </ion-content>

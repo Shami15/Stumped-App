@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color='primary'>
-    <ion-title>Question</ion-title>
+    <ion-title>{{ 'quest' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -85,7 +85,7 @@
       <ion-item>
         <ion-textarea class='text-box' placeholder='whats your input?' formControlName="description"></ion-textarea>
       </ion-item>
-      <button ion-button type="submit" block [disabled]="!post.valid">POST</button>
+      <button ion-button type="submit" block [disabled]="!post.valid">{{ 'post.post' | translate }}</button>
     </ion-row>
   </form>
 </ion-footer>

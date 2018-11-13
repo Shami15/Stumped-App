@@ -16,7 +16,7 @@
 <ion-content>
   <div padding class='nav'>
     <h1>{{this.info.name}}</h1>
-    <h5><u>Class ID:</u></h5>
+    <h5><u>{{ 'info.id' | translate }}</u></h5>
     <p> {{this.info._id}}</p>
 
     <h5><u>{{ 'subject' | translate }}</u> {{this.info.subject}}</h5>
@@ -30,7 +30,7 @@
   <button ion-button >Edit Class</button> -->
   <div padding>
     <p *ngIf='this.info.teacher !== this.user' (click)='leaveClass()' ><u>{{ 'info.leave' | translate }}</u></p>
-    <p *ngIf='this.info.teacher == this.user' (click)='delete()'><u>Delete Class</u></p>
+    <p *ngIf='this.info.teacher == this.user' (click)='delete()'><u>{{ 'info.del' | translate }}</u></p>
     <p *ngIf='this.info.teacher == this.user' (click)='addStudents()'><u>{{ 'info.add' | translate }}</u></p>
     <p *ngIf='this.info.teacher == this.user' (click)='editClass()'><u>{{ 'info.edit' | translate }}</u></p>
   </div>

@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { ClassPage } from '../class/class';
 import { Body } from '@angular/http/src/body';
 
+
 /**
  * Generated class for the AddClassPage page.
  *
@@ -59,7 +60,8 @@ export class AddClassPage {
         questions: [],
       };
     this.ds.createClass(body);
-    let yarn = 'Class created ';
+    let yarn = this.ds.translateFunc('add.created')
+
     //THE PROBLEM IS HERE BECAUSE THERE IS NO QUESTION VALUE, THE QUESTION FIELD IS CREATED IN THE BACK END SO FIX THAT.
     this.presentConfirm(body, yarn);
 
@@ -95,7 +97,8 @@ export class AddClassPage {
     try{
       this.classVal.students.push(this.ds.cred.userInfo);
       this.ds.joinClass(this.classVal._id, this.classVal).subscribe();
-      let yarn = 'Joined class ';
+
+      let yarn = this.ds.translateFunc('add.joined')
       this.presentConfirm(this.classVal, yarn);
     } catch(err) { console.log(err)}
 
@@ -104,19 +107,24 @@ export class AddClassPage {
 
 
   presentConfirm(dass, type) {
+    let succ = this.ds.translateFunc('add.succ')
+    let mess = this.ds.translateFunc('add.mess')
+    let yes = this.ds.translateFunc('yes')
+    let no = this.ds.translateFunc('no')
+
     let alert = this.alertCtrl.create({
-      title: type + 'succesfully',
-      message: 'Would you like to view the class?',
+      title: type + succ,
+      message: mess,
       buttons: [
         {
-          text: 'Yes',
+          text: yes,
           role: 'cancel',
           handler: () => {
             this.navCtrl.push(ClassPage, dass)
           }
         },
         {
-          text: 'No',
+          text: no,
           handler: () => {
           }
         }
@@ -130,12 +138,17 @@ export class AddClassPage {
   }
 
   presentAlert() {
+    let dup = this.ds.translateFunc('add.dup')
+    let sub = this.ds.translateFunc('add.sub')
+    let ok = this.ds.translateFunc('ok')
     let alert = this.alertCtrl.create({
-      title: 'Duplicate user',
-      subTitle: 'This user is already registered in this class',
-      buttons: ['OK']
+      title: dup,
+      subTitle: sub,
+      buttons: [ok]
     });
     alert.present();
   }
+
+  
 
 }

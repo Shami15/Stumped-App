@@ -34,19 +34,22 @@ export class ClassIPage {
   }
 
   leaveClass() {
+    let sure = this.ds.translateFunc('info.sure')
+    let yes = this.ds.translateFunc('yes')
+    let no = this.ds.translateFunc('no')
     let alert = this.alertCtrl.create({
-      title: 'Are you sure you want to leave this class?',
+      title: sure,
       message: null,
       buttons: [
         {
-          text: 'No',
+          text: no,
           role: 'cancel',
           handler: () => {
             console.log('Cancel')
           }
         },
         {
-          text: 'Yes',
+          text: yes,
           handler: () => {
 
             _.pull(this.info.students, this.user);

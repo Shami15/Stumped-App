@@ -76,9 +76,9 @@
           <ion-option value="c">Chinese</ion-option>
         </ion-select>
       </ion-item> -->
-      <button ion-button block type='submit' [disabled]="!nUser.valid">Sign Up</button>
+      <button ion-button block type='submit' [disabled]="!nUser.valid">{{ 'login.sign' | translate }}</button>
     </form>
-    <p>already registered? <u (click)='switch();'>sign-in</u></p>
+    <p>{{ 'login.aReg' | translate }} <u (click)='switch();'>{{ 'login.sign' | translate }}</u></p>
   </div>
 
   <!-- <p (click)='delete()'>DELETE ME!</p> -->
