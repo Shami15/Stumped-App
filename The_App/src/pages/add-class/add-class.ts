@@ -29,6 +29,7 @@ export class AddClassPage {
   private classVal : any;
   private state : string = "u";
   private expand : Boolean = false;
+  private lang = 'en';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
     private ds: DataServiceProvider,  private alertCtrl: AlertController) {
@@ -38,7 +39,7 @@ export class AddClassPage {
       subject: ['', Validators.required],
       description: ['', Validators.required],
       students: [''],
-
+      lang : ['en', Validators.required]
     });
 
     this.ds.getUser("000").subscribe(data => {this.user = data});
@@ -58,6 +59,7 @@ export class AddClassPage {
         teacher: this.ds.cred.userInfo.userName,
         description : dass.value.description,
         questions: [],
+        lang : dass.value.lang
       };
     this.ds.createClass(body);
     let yarn = this.ds.translateFunc('add.created')

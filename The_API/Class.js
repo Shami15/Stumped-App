@@ -7,7 +7,8 @@ var ClassSchema = new mongoose.Schema({
     "subject": String,
     "questions": Array,
     "description" : String,
-    "language" : String
+    "lang" : String,
+    // "Class" : String
 });
 mongoose.model('Class', ClassSchema);
 module.exports = mongoose.model('Class');

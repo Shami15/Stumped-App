@@ -13,7 +13,9 @@ router.post('/', function (req, res) {
             students : req.body.students,
             subject : req.body.subject,
             name : req.body.name,
-            questions : req.body.questions
+            questions : req.body.questions,
+            description : req.body.description,
+            lang : req.body.lang
         }, 
         function (err, Class) {
             if (err) return res.status(500).send("There was a problem adding the information to the database.");

@@ -38,8 +38,16 @@
         <ion-label>{{ 'add.desc' | translate }}</ion-label>
         <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
+      <ion-item>
+        <ion-label>{{ 'user.lang' | translate }}</ion-label>
+        <ion-select formControlName="lang" [(ngModel)]='lang'>
+          <ion-option value="en">{{ 'lang.en' | translate }}</ion-option>
+          <ion-option value="sp">{{ 'lang.sp' | translate }}</ion-option>
+          <ion-option value="fr">{{ 'lang.fr' | translate }}</ion-option>
+          <ion-option value="ch">{{ 'lang.ch' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
       <ion-item (click)='collapsible()'>
-
         <ion-icon item-left *ngIf='!this.expand' name="add"></ion-icon>
         <ion-icon item-left *ngIf='this.expand' name="remove"></ion-icon>
         <ion-label>{{ 'add.students' | translate }}</ion-label>
@@ -59,10 +67,6 @@
       <!-- <ion-item>
         <ion-textarea readonly='true' formControlName="students" [(ngModel)]="this.students"></ion-textarea>
       </ion-item> -->
-      <!-- <ion-card *ngFor="let users of students.userName | async">
-      {{users}}
-
-    </ion-card> -->
 
       <button ion-button type="submit" block [disabled]="!class.valid">{{ 'add.create' | translate }}</button>
     </form>

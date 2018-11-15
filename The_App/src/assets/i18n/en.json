@@ -28,7 +28,8 @@
 		"A" : "ANSWERED",
 		"U" : "UNANSWERED",
 		"remove" : "Remove Question?",
-		"sure" : "Are you sure you want to remove this question?"
+		"sure" : "Are you sure you want to remove this question?",
+		"trans" : "Translate this page?"
 	},
 
 	"subject" : "Subject",
@@ -83,9 +84,18 @@
 		"passC" : "Password Confirm",
 		"aReg" : "already registered?",
 		"match" : "Passwords do not match"
+	},
 
+	"inq" : {
+		"sure" : "Are you sure?",
+		"ans" : "By choosing yes, you are indicating that your question has been answered",
+		"unans" : "'By choosing yes, you are indicating that your question is stil unclear and are reposting it to the unanswered section",
+		"remove" : "Are you sure you want to remove this ",
+		"title" : "Remove ",
+		"Comment" : "Comment",
+		"Question" : "Question"
 	}
-
+ 
 
 	
 }

@@ -6,6 +6,7 @@ import { ClassIPage } from '../class-i/class-i';
 import { DataServiceProvider } from "../../providers/data-service/data-service";
 import _ from 'lodash';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+const translate = require('translate');
 
 /**
  * Generated class for the ClassPage page.
@@ -19,23 +20,34 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   templateUrl: 'class.html',
 })
 export class ClassPage {
-  private Class : any;
-  private state : string = "u";
-  private questions : any;
-  private voted : string = "primary";
-  private data : any;
-  private user : any;
-  private like : any;
+  private Class: any;
+  private state: string = "u";
+  private questions: any;
+  private voted: string = "primary";
+  private data: any;
+  private user: any;
+  private like: any;
+  private yes = this.ds.translateFunc('yes');
+  private no = this.ds.translateFunc('no');
+  private babel: boolean = false;
+  public ring: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl : PopoverController, 
-    public mode : ModalController, private ds : DataServiceProvider, private alertCtrl : AlertController) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
+    public mode: ModalController, private ds: DataServiceProvider, private alertCtrl: AlertController) {
     this.Class = this.navParams.data; this.questions = this.Class.questions;
-    this.user = this.ds.cred.userInfo.userName
+    this.user = this.ds.cred.userInfo.userName;
+    let yes = this.ds.translateFunc('yes');
+    let no = this.ds.translateFunc('no');
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassPage');
+    if (this.Class.lang !== this.ds.lang) {
+      console.log('DI LANGUAGE DIFFERENT');
+      this.transCheck()
+    }
     // this.like = _.includes(this.questions.votes, this.user)
   }
 
@@ -55,24 +67,25 @@ export class ClassPage {
 
   showQuestion(question) {
     this.ds.saucer = this.Class;
-    this.navCtrl.push(QuestionPage , question)
+    this.navCtrl.push(QuestionPage, question)
   }
 
-  postComment(type){
+  postComment(type) {
     this.ds.frizbe = type;
     let profileModal = this.mode.create(CommentPage, this.Class);
-   profileModal.present();
+    profileModal.present();
   }
 
-  showClass(classInfo, myEvent){
-  let popover = this.popoverCtrl.create(ClassIPage, classInfo/*, {cssClass: 'contact-popover'}*/);
+  showClass(classInfo, myEvent) {
+    let popover = this.popoverCtrl.create(ClassIPage, classInfo/*, {cssClass: 'contact-popover'}*/);
     popover.present({
       ev: myEvent
     });
-    popover.onDidDismiss( data => {
-      if (data !== null){
+    popover.onDidDismiss(data => {
+      if (data !== null) {
         this.navCtrl.pop()
-      console.log('DISMISSED')}
+        console.log('DISMISSED')
+      }
     })
   }
 
@@ -105,6 +118,55 @@ export class ClassPage {
     });
     alert.present();
   }
-  
+
+  transCheck() {
+    let trans = this.ds.translateFunc('class.trans');
+    let alert = this.alertCtrl.create({
+      title: trans,
+      message: null,
+      buttons: [
+        {
+          text: this.no,
+          role: 'cancel',
+          handler: () => {
+
+          }
+        },
+        {
+          text: this.yes,
+          handler: () => {
+            this.towerOfBabel()
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+
+  towerOfBabel() {
+    this.babel = true;
+    let name = this.yandex(this.Class.name, 'es');
+    this.ring = _.forEach(this.questions, value => {
+      value.topic = this.yandex(value.topic, 'es');
+      value.description = this.yandex(value.description, 'es')
+    })
+    console.log(JSON.stringify(this.ring))
+
+
+
+    // this.Class.title = 
+    // this.questions
+  }
+
+  async yandex(param, lang) {
+    var result
+    result = await translate(param, { to: lang, engine: 'yandex', key: 'trnsl.1.1.20181114T194518Z.640236167701ee19.296338b36aa783c4b9a4aee7b5155955c41493ca' }
+    ).then(text => {
+      return text
+    });
+    console.log(result)
+    return result
+  }
 
 }

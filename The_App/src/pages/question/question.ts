@@ -22,6 +22,8 @@ export class QuestionPage {
   private post: any;
   private user: any;
   private like: Boolean;
+  private yes = this.ds.translateFunc('yes');
+  private no = this.ds.translateFunc('no')
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public ds: DataServiceProvider, public formB: FormBuilder,
     private alertCtrl: AlertController) {
@@ -31,6 +33,7 @@ export class QuestionPage {
     this.post = this.formB.group({
       description: ['', Validators.required],
     });
+    
   }
 
   ionViewDidLoad() {
@@ -56,19 +59,21 @@ export class QuestionPage {
   }
 
   answered() {
+    let sure = this.ds.translateFunc('inq.sure');
+    let ans = this.ds.translateFunc('inq.ans');
     let alert = this.alertCtrl.create({
-      title: 'Are you sure?',
-      message: 'By choosing yes, you are indicating that your question has been answered',
+      title: sure,
+      message: ans,
       buttons: [
         {
-          text: 'Cancel',
+          text: this.no,
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Yes',
+          text: this.yes,
           handler: () => {
             this.question.answered = true;
             let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
@@ -82,19 +87,21 @@ export class QuestionPage {
   }
 
   unclear() {
+    let sure = this.ds.translateFunc('inq.sure');
+    let mess = this.ds.translateFunc('inq.unans');
     let alert = this.alertCtrl.create({
-      title: 'Are you sure?',
-      message: 'By choosing yes, you are indicating that your question is stil unclear and are reposting it to the unanswered section',
+      title: sure,
+      message: mess,
       buttons: [
         {
-          text: 'Cancel',
+          text: this.no,
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Yes',
+          text: this.yes,
           handler: () => {
             this.question.answered = false;
             let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
@@ -124,21 +131,25 @@ export class QuestionPage {
   
 
   delete(ques, comm) {
+    let type = this.ds.translateFunc(ques);
+    let rem = this.ds.translateFunc('inq.title');
+    let sure = this.ds.translateFunc('inq.remove');
     let alert = this.alertCtrl.create({
-      title: 'Remove ' + ques + '?',
-      message: 'Are you sure you want to remove this ' + ques + '?',
+      title: rem + type + '?',
+      message: sure + type + '?',
       buttons: [
         {
-          text: 'No',
+          text: this.no,
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Yes',
+          text: this.yes,
           handler: () => {
             if (ques == 'Question') {
+
               _.remove(this.Class.questions, this.question)
               console.log(this.Class.questions)
               this.ds.joinClass(this.Class._id, this.Class).subscribe();
