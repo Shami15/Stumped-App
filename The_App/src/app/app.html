@@ -20,9 +20,9 @@
 
       <ion-select [(ngModel)]="lang" (ionChange)='changeLanguage($event)'>
         <ion-option value="en">{{ 'lang.en' | translate }}</ion-option>
-        <ion-option value="sp">{{ 'lang.sp' | translate }}</ion-option>
+        <ion-option value="es">{{ 'lang.sp' | translate }}</ion-option>
         <ion-option value="fr">{{ 'lang.fr' | translate }}</ion-option>
-        <ion-option value="ch">{{ 'lang.ch' | translate }}</ion-option>
+        <ion-option value="zh">{{ 'lang.ch' | translate }}</ion-option>
       </ion-select>
     </ion-item>
     <button block color="danger" ion-button menuToggle (click)='logout()'>{{ 'user.log' | translate }}</button>

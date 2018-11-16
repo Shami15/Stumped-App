@@ -5,8 +5,7 @@ import { CommentPage } from '../comment/comment';
 import { ClassIPage } from '../class-i/class-i';
 import { DataServiceProvider } from "../../providers/data-service/data-service";
 import _ from 'lodash';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-const translate = require('translate');
+// import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 /**
  * Generated class for the ClassPage page.
@@ -30,7 +29,8 @@ export class ClassPage {
   private yes = this.ds.translateFunc('yes');
   private no = this.ds.translateFunc('no');
   private babel: boolean = false;
-  public ring: any;
+  // public ring: any;
+  public transTitle: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
@@ -145,28 +145,20 @@ export class ClassPage {
 
 
   towerOfBabel() {
-    this.babel = true;
-    let name = this.yandex(this.Class.name, 'es');
-    this.ring = _.forEach(this.questions, value => {
-      value.topic = this.yandex(value.topic, 'es');
-      value.description = this.yandex(value.description, 'es')
+    this.babel = true; 
+    this.ds.yandex(this.Class.name, this.Class.lang).then(val => {
+      this.transTitle = val
     })
-    console.log(JSON.stringify(this.ring))
-
-
-
-    // this.Class.title = 
-    // this.questions
+    _.forEach(this.questions, value => {
+    this.ds.yandex(value.topic, this.Class.lang).then(val => {
+        value.topic = val
+      });
+    this.ds.yandex(value.description, this.Class.lang).then(val => {
+        value.description = val
+      });
+    })
   }
 
-  async yandex(param, lang) {
-    var result
-    result = await translate(param, { to: lang, engine: 'yandex', key: 'trnsl.1.1.20181114T194518Z.640236167701ee19.296338b36aa783c4b9a4aee7b5155955c41493ca' }
-    ).then(text => {
-      return text
-    });
-    console.log(result)
-    return result
-  }
+  
 
 }

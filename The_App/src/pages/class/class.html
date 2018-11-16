@@ -8,7 +8,8 @@
 
   <ion-navbar color='primary'>
     <ion-row>
-      <ion-title>{{this.Class.name}}</ion-title>
+      <ion-title *ngIf='!babel'>{{this.Class.name}}</ion-title>
+      <ion-title *ngIf='babel'>{{this.transTitle}}</ion-title>
       <button ion-button (click)='showClass(this.Class);'>
         <ion-icon name="information-circle"></ion-icon>
       </button>
