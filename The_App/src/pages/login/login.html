@@ -12,37 +12,39 @@
 
 </ion-header> -->
 
-
-<!-- <ion-img src="../../assets/imgs/stump.png"></ion-img> -->
-
 <ion-content padding class='bkgrnd'>
-    <!-- <div>{{ 'hello.hello' | translate:param }}</div> -->
-
-    <img  src="../../assets/imgs/stump-min.png">
+    <!-- This is the logo -->
+    <img  src="../../assets/imgs/stumped-min.png">
+    <!-- The login form -->
   <div *ngIf='!page'>
     <h1>{{ 'login.login' | translate }}</h1>
-
     <form [formGroup]="user" (ngSubmit)="login(this.user)">
       <ion-item>
         <ion-label>{{ 'login.uN' | translate }}</ion-label>
         <ion-input formControlName="userName"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label>{{ 'login.pass' | translate }}</ion-label>
         <ion-input formControlName="password" type='password'></ion-input>
       </ion-item>
+
       <button ion-button block type='submit' [disabled]="!user.valid">{{ 'login.login' | translate }}</button>
     </form>
+        <!-- String that switches the forms back and forth -->
     <p>{{ 'login.reg' | translate }} <u (click)='switch();'>{{ 'login.cre' | translate }}</u></p>
   </div>
 
+  <!-- The signup form -->
   <div *ngIf='page'>
     <h1>{{ 'login.sign' | translate }}</h1>
     <form [formGroup]="nUser" (ngSubmit)="signup(this.nUser)">
+
       <ion-item>
         <ion-label>{{ 'login.uN' | translate }}</ion-label>
         <ion-input formControlName="userName"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label>{{ 'login.email' | translate }}</ion-label>
         <ion-input formControlName="email" type='email'></ion-input>
@@ -67,20 +69,10 @@
         <ion-input formControlName="passwordC" type='password'></ion-input>
       </ion-item>
 
-      <!-- <ion-item>
-        <ion-label>Language</ion-label>
-        <ion-select>
-          <ion-option value="f">English</ion-option>
-          <ion-option value="a">Spanish</ion-option>
-          <ion-option value="b">French</ion-option>
-          <ion-option value="c">Chinese</ion-option>
-        </ion-select>
-      </ion-item> -->
       <button ion-button block type='submit' [disabled]="!nUser.valid">{{ 'login.sign' | translate }}</button>
     </form>
+    <!-- String that switches the forms back and forth -->
     <p>{{ 'login.aReg' | translate }} <u (click)='switch();'>{{ 'login.sign' | translate }}</u></p>
   </div>
-
-  <!-- <p (click)='delete()'>DELETE ME!</p> -->
 
 </ion-content>

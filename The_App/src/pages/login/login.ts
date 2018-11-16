@@ -3,9 +3,8 @@ import { NavController, NavParams, LoadingController, Loading, ToastController, 
 import { DataServiceProvider } from "../../providers/data-service/data-service";
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { HelloIonicPage } from '../hello-ionic/hello-ionic';
-import {TranslateService} from "@ngx-translate/core";
+import { TranslateService } from "@ngx-translate/core";
 import { IonicStorageModule } from '@ionic/storage';
-
 
 /**
  * Generated class for the LoginPage page.
@@ -20,35 +19,37 @@ import { IonicStorageModule } from '@ionic/storage';
 })
 export class LoginPage {
 
-  registerCredentials = { email: '', password: '' };
+  // registerCredentials = { email: '', password: '' };
   loading: Loading;
   // private credentials = this.ds.cred
-  private user : any;
-  private nUser : any;
-  private page : boolean = false;
+  private user: any;
+  private nUser: any;
+  private page: boolean = false;//this boolean is for switching the forms
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public ds: DataServiceProvider, 
-    private loadingCtrl: LoadingController, private toastCtrl : ToastController, private formBuilder : FormBuilder, private event : Events,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public ds: DataServiceProvider,
+    private loadingCtrl: LoadingController, private toastCtrl: ToastController, private formBuilder: FormBuilder, private event: Events,
     private translate: TranslateService) {
 
-      this.user = this.formBuilder.group({
-        userName: ['', Validators.required],
-        password: ['', Validators.required]
-      });
+    // The login form
+    this.user = this.formBuilder.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required]
+    });
 
-      this.nUser = this.formBuilder.group({
-        userName: ['', Validators.required],
-        password: ['', Validators.required],
-        fName: [''],
-        lName: [''],
-        passwordC: ['', Validators.required],
-        email: ['', Validators.required],
-      });
+    // signup form
+    this.nUser = this.formBuilder.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
+      fName: [''],
+      lName: [''],
+      passwordC: ['', Validators.required],
+      email: ['', Validators.required],
+    });
 
-      translate.setDefaultLang('en');
+    translate.setDefaultLang('en');
 
-      // the lang to use, if the lang isn't available, it will use the current loader to get them
-     translate.use('en');
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    translate.use('en');
   }
 
 
@@ -57,49 +58,34 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  // public login(user) {
-  //   this.showLoading()
-  //   this.ds.login(user).subscribe(allowed => {
-  //     if (allowed) {        
-  //       // this.navCtrl.setRoot('HomePage');
-  //       console.log(JSON.stringify(allowed));
-  //       this.ds.cred = allowed;
-  //       this.publish(allowed.userInfo)
-  //       this.navCtrl.setRoot(HelloIonicPage)
-  //     } else {
-  //       this.showError("Access Denied");
-  //     }
-  //   },
-  //     error => {
-  //       this.showError(error);
-  //     });
-  // }
-
-   login(user){
-    try{
-    this.showLoading()
-    let body = {
-      userName: user.value.userName,
-      password: user.value.password
-    };
-    this.ds.test(body)
-   } catch (e) {
-     this.ds.showToast(e)
-   }
-
+  login(user) {
+    try {
+      this.showLoading()
+      let body = {
+        userName: user.value.userName,
+        password: user.value.password
+      };
+      this.ds.test(body)
+    } catch (e) {
+      this.ds.showToast(e)
+    }
   }
 
   public signup(user) {
-    let match = this.ds.translateFunc('match')
-    //dis needs to change plzzzzz
-    if(user.password !== user.passwordC){
-      this.ds.showToast(match)
-    }else{
-    this.showLoading()
-    this.ds.register(user)
+    try {
+      let match = this.ds.translateFunc('match')
+      //dis needs to change plzzzzz
+      if (user.password !== user.passwordC) {
+        this.ds.showToast(match)
+      } else {
+        this.showLoading()
+        this.ds.register(user)
+      }
+    } catch (e) {
+      this.ds.showToast(e)
     }
   }
- 
+
   showLoading() {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...',
@@ -110,37 +96,29 @@ export class LoginPage {
       this.loading.dismiss();
     }, 2500);
   }
- 
-  showError(text) {
-    this.loading.dismiss();
- 
-    // let alert = this.alertCtrl.create({
-    //   title: '',
-    //   subTitle: text,
-    //   buttons: ['OK']
-    // });
-    // alert.present(prompt);
 
-    let toast = this.toastCtrl.create({
-      message: text,
-      duration: 3000,
-      position: 'top'
-    });
-    toast.present();
+  // showError(text) {
+  //   this.loading.dismiss();
+  //   let toast = this.toastCtrl.create({
+  //     message: text,
+  //     duration: 3000,
+  //     position: 'top'
+  //   });
+  //   toast.present();
 
-  }
+  // }
 
-  switch(){
+  //function that switches the forms
+  switch() {
     this.page ? this.page = false : this.page = true
   }
 
-  publish(user){
-    this.event.publish('user : logged in', user)
+  //this function publishes the login event when login is successful
+  publish(user) {
+    try {
+      this.event.publish('user : logged in', user)
+    } catch (e) {
+      this.ds.showToast(e)
+    }
   }
-
-  // delete(){
-  //   this.navCtrl.pop()
-  // }
-
-
 }

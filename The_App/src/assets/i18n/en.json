@@ -66,9 +66,9 @@
 
 	"lang" : {
 		"en" : "English",
-		"sp" : "Spanish",
-		"fr" : "French",
-		"ch" : "Chinese"
+		"sp" : "Español",
+		"fr" : "Français",
+		"ch" : "中文"
 	},
 
 	"login" : {
@@ -89,7 +89,7 @@
 	"inq" : {
 		"sure" : "Are you sure?",
 		"ans" : "By choosing yes, you are indicating that your question has been answered",
-		"unans" : "'By choosing yes, you are indicating that your question is stil unclear and are reposting it to the unanswered section",
+		"unans" : "By choosing yes, you are indicating that your question is still unclear and are reposting it to the unanswered section",
 		"remove" : "Are you sure you want to remove this ",
 		"title" : "Remove ",
 		"Comment" : "Comment",

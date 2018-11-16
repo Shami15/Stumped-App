@@ -95,6 +95,7 @@ export class MyApp {
   }
 
   logout() {
+    this.storage.remove('cred');
     this.nav.setRoot(LoginPage)
   }
 

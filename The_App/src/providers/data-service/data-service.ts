@@ -9,7 +9,7 @@ import { ToastController, Events } from 'ionic-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-const translation = require('translate');
+import translation from 'translate';
 import _ from 'lodash';
 
 /*

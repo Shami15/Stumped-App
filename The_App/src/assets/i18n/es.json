@@ -1,0 +1,101 @@
+{
+	"home": {
+		"home": "Casa",
+		"all": "TODAS LAS CLASES",
+		"my": "MIS CLASES"
+	},
+
+	"add" : {
+		"add" : "AÑADIR CLASE",
+		"create" : "CREAR CLASE",
+		"join" : "ÚNETE A LA CLASE",
+		"name" : "Nombre",
+		"subject" : "Tema",
+		"students" : "Estudiantes",
+		"id" : "Identificador de Clase",
+		"desc" : "Descripción",
+		"created" : "Clase Creada ",
+		"joined" : "Clase Unida ",
+		"succ" : "exitosamente",
+		"mess" : "¿Te gustaría ver la clase?",
+		"dup" : "Usuario Duplicado",
+		"sub" : "Este usuario ya está registrado en esta clase"
+	},
+
+	"class" : {
+		"no" : "Aún no se han hecho preguntas",
+		"be" : "SÉ EL PRIMERO",
+		"A" : "CONTESTADO",
+		"U" : "NO RESPUESTA",
+		"remove" : "¿Quitar pregunta?",
+		"sure" : "¿Estás seguro de que quieres eliminar esta pregunta?",
+		"trans" : "¿Traduzca esta pagina?"
+	},
+
+	"subject" : "Tema",
+	"by" : "Por",
+	"ok" : "Bueno",
+
+	"info" : {
+		"id": "Identificador de Clase:",
+		"leave" : "Salir de Clase",
+		"add" : "Añadir estudiante",
+		"edit" : "Editar clase",
+		"del" : " Eliminar clase",
+		"sure" : "¿Estás seguro de que quieres abandonar esta clase?"
+	},
+
+	"post" : {
+		"new" : "Nueva Pregunta",
+		"com" : "Nuevo Comentario",
+		"post" : "ENVIAR"
+		
+	},
+
+	"input" : "¿Cuál es su entrada?",
+	"quest" : "Pregunta",
+	"yes" : "Sí",
+	"no" : "No",
+
+	"user" : {
+		"wel" : "Bienvenido",
+		"edit" : "Editar Usuario",
+		"log" : "Cerrar sesión",
+		"lang" : "Idioma"
+	},
+
+	"lang" : {
+		"en" : "English",
+		"sp" : "Español",
+		"fr" : "Français",
+		"ch" : "中文"
+	},
+
+	"login" : {
+		"login" : "Iniciar Sesión",
+		"sign" : "Regístrate",
+		"uN" : "Nombre de usuario",
+		"pass" : "Contraseña",
+		"reg" : "¿No estás registrado?",
+		"cre" : "crea una cuenta",
+		"email" : "Email",
+		"fN" : "Nombre de Pila",
+		"lN" : "Apellido",
+		"passC" : "Confirmar contraseña",
+		"aReg" : "¿Ya estás registrado?",
+		"match" : "Las contraseñas no coinciden"
+	},
+
+	"inq" : {
+		"sure" : "¿Estás seguro?",
+		"ans" : "Al elegir Sí, está indicando que su pregunta ha sido respondida.",
+		"unans" : "Al seleccionar Sí, está indicando que su pregunta aún no está clara y la está publicando en la sección sin respuesta",
+		"remove" : "¿Estás seguro de que quieres eliminar esto? ",
+		"title" : "Retirar ",
+		"Comment" : "Comentario",
+		"Question" : "Pregunta"
+	}
+ 
+
+	
+}
