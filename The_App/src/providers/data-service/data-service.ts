@@ -25,7 +25,8 @@ export class DataServiceProvider {
   public lang: string;
 
   // rootUrl : string = "https://shammarlangaignecom.000webhostapp.com";
-  rootUrl: string = "http://localhost:3000";
+  // rootUrl: string = "http://localhost:3000";
+  rootUrl: string = "http://ec2-3-16-165-84.us-east-2.compute.amazonaws.com:9000";
   file: string = 'classes';
   private currentUser: any;
   public user = [{
