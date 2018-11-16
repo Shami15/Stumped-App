@@ -6,8 +6,8 @@ var app = express();
 var passport = require('passport')
 app.use(cors())
 var db = require('./db');
-var UserController = require('./UserController');
-var ClassController = require('./ClassController');
+var UserController = require('./Usercontroller');
+var ClassController = require('./Classcontroller');
 app.use('/users', UserController);
 app.use('/classes', ClassController);
 var session = require('express-session');
