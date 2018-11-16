@@ -15,46 +15,37 @@ import _ from 'lodash';
 export class HelloIonicPage {
 
   data : Observable<Array<dataModel>>;
-  // pear : Observable<Array<dataModel>>;
-  private state : string = "u";
+  private state : string = "u"; //string that is used to switch the sections of the app
   public user : any;
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController, private ds: DataServiceProvider, 
     private translate: TranslateService) {
-    this.getData();
-    this.user = this.ds.cred.userInfo;
+    this.getData();//gets all the classes
+    this.user = this.ds.cred.userInfo;//sets the logged in user as a local variable
 
-    translate.setDefaultLang('en');
-
+    // translate.setDefaultLang('en');
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-   translate.use('en');
-
+  //  translate.use('en');
   }
 
   addClass(){
+    try {
+    //Navigates to the page that let users create and join classes
     this.navCtrl.push(AddClassPage)
+    }catch (e) { this.ds.showToast(e) }
   }
 
-  // showUser(myEvent) {
-  //   let popover = this.popoverCtrl.create(UserPage);
-  //   popover.present({
-  //     ev: myEvent
-  //   });
-  // }
-
   getData(){
+    try {
+    //retrieves classes from the database
     this.data = this.ds.getData();
     // this.pear = _.filter(this.data, {'teacher' : this.user.teacher})
+    } catch (e) { this.ds.showToast(e) }
   }
 
   goToClass(Class){
+    try {
+    //Navigates to the class the user selected
     this.navCtrl.push(ClassPage, Class)
+    } catch (e) { this.ds.showToast(e) }
   }
-  
-  // public changeLanguage(language)
-  // {
-  //   this.translate.use(language);
-  // }
-
-
-  
 }

@@ -48,7 +48,6 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
-    // Http,
     HttpModule,
     HttpClientModule,
     TranslateModule.forRoot({

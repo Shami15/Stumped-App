@@ -19,18 +19,18 @@ import _ from 'lodash';
   templateUrl: 'class.html',
 })
 export class ClassPage {
-  private Class: any;
-  private state: string = "u";
-  private questions: any;
-  private voted: string = "primary";
-  private data: any;
-  private user: any;
-  private like: any;
+  private Class: any;//The class info
+  private state: string = "u"; //string for the segments
+  private questions: any; //array of questions the class contains
+  // private voted: string = "primary";
+  // private data: any;
+  private user: any;//username of logged in user
+  private like: any; //like boolean to see if this user already liked the question
+  //yes and no strings
   private yes = this.ds.translateFunc('yes');
   private no = this.ds.translateFunc('no');
-  private babel: boolean = false;
-  // public ring: any;
-  public transTitle: any;
+  private babel: boolean = false; //Boolean to detect change in language
+  public transTitle: any; //translated title
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
@@ -44,13 +44,13 @@ export class ClassPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassPage');
+    //checks if the content is different from the set language
     if (this.Class.lang !== this.ds.lang) {
-      console.log('DI LANGUAGE DIFFERENT');
       this.transCheck()
     }
-    // this.like = _.includes(this.questions.votes, this.user)
   }
 
+  // voting function
   upVote(item) {
     if (this.like == false) {
       this.questions.votes.push(this.user)
@@ -65,17 +65,20 @@ export class ClassPage {
     }
   }
 
+  // navigate to selected function
   showQuestion(question) {
     this.ds.saucer = this.Class;
     this.navCtrl.push(QuestionPage, question)
   }
 
+  // Open the comment modal
   postComment(type) {
     this.ds.frizbe = type;
     let profileModal = this.mode.create(CommentPage, this.Class);
     profileModal.present();
   }
 
+  //Show the class information
   showClass(classInfo, myEvent) {
     let popover = this.popoverCtrl.create(ClassIPage, classInfo/*, {cssClass: 'contact-popover'}*/);
     popover.present({
@@ -108,10 +111,11 @@ export class ClassPage {
         {
           text: yes,
           handler: () => {
-            _.remove(this.questions, question)
-            console.log(this.questions)
-            this.Class.questions = this.questions
-            this.ds.joinClass(this.Class._id, this.Class).subscribe();
+            try {
+              _.remove(this.questions, question)
+              this.Class.questions = this.questions
+              this.ds.joinClass(this.Class._id, this.Class).subscribe();
+            } catch (e) { this.ds.showToast(e) }
           }
         }
       ]
@@ -119,6 +123,7 @@ export class ClassPage {
     alert.present();
   }
 
+  // Ask the user if they want to translate the dynamic content
   transCheck() {
     let trans = this.ds.translateFunc('class.trans');
     let alert = this.alertCtrl.create({
@@ -129,7 +134,6 @@ export class ClassPage {
           text: this.no,
           role: 'cancel',
           handler: () => {
-
           }
         },
         {
@@ -143,22 +147,21 @@ export class ClassPage {
     alert.present();
   }
 
-
+  //translating the dynamic content
   towerOfBabel() {
-    this.babel = true; 
-    this.ds.yandex(this.Class.name, this.Class.lang).then(val => {
-      this.transTitle = val
-    })
-    _.forEach(this.questions, value => {
-    this.ds.yandex(value.topic, this.Class.lang).then(val => {
-        value.topic = val
-      });
-    this.ds.yandex(value.description, this.Class.lang).then(val => {
-        value.description = val
-      });
-    })
+    try {
+      this.babel = true;
+      this.ds.yandex(this.Class.name, this.Class.lang).then(val => {
+        this.transTitle = val
+      })
+      _.forEach(this.questions, value => {
+        this.ds.yandex(value.topic, this.Class.lang).then(val => {
+          value.topic = val
+        });
+        this.ds.yandex(value.description, this.Class.lang).then(val => {
+          value.description = val
+        });
+      })
+    } catch (e) { this.ds.showToast(e) }
   }
-
-  
-
 }

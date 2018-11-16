@@ -16,12 +16,12 @@ import _ from 'lodash';
   templateUrl: 'question.html',
 })
 export class QuestionPage {
-  public Class: any;
-  public question: any;
-  public comments: any;
-  private post: any;
-  private user: any;
-  private like: Boolean;
+  public Class: any;//Holds the class information
+  public question: any;//holds the selected question
+  public comments: any;//the comments array for the selected question
+  private post: any;//textbox for posting comments
+  private user: any;//users' username
+  private like: Boolean;//boolean for like function
   private yes = this.ds.translateFunc('yes');
   private no = this.ds.translateFunc('no')
 
@@ -30,17 +30,20 @@ export class QuestionPage {
     this.Class = this.ds.saucer; this.question = this.navParams.data; this.comments = this.question.comment;
     this.user = this.ds.cred.userInfo.userName;
 
+    // used for posting comments
     this.post = this.formB.group({
       description: ['', Validators.required],
     });
-    
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad QuestionPage');
+    //checks to see if the user already liked the question
     this.like = _.includes(this.question.votes, this.user)
   }
 
+  //function to post new comment on this page
   postCom(post) {
     let addition = {
       user: this.ds.cred.userInfo.userName,
@@ -51,13 +54,18 @@ export class QuestionPage {
       file: '',
       votes: []
     }
-    this.question.comment.push(addition);
-    let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
-    this.Class.questions[index] = this.question;
+    try {
+      this.question.comment.push(addition);
+      let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
+      this.Class.questions[index] = this.question;
 
-    this.ds.joinClass(this.Class._id, this.Class).subscribe();
+      this.ds.joinClass(this.Class._id, this.Class).subscribe();
+    } catch (e) {
+      this.ds.showToast(e)
+    }
   }
 
+  //alert that confirms you want to indicate your question has been answered
   answered() {
     let sure = this.ds.translateFunc('inq.sure');
     let ans = this.ds.translateFunc('inq.ans');
@@ -75,10 +83,14 @@ export class QuestionPage {
         {
           text: this.yes,
           handler: () => {
-            this.question.answered = true;
-            let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
-            this.Class.questions[index] = this.question;
-            this.ds.joinClass(this.Class._id, this.Class).subscribe();
+            try {
+              this.question.answered = true;
+              let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
+              this.Class.questions[index] = this.question;
+              this.ds.joinClass(this.Class._id, this.Class).subscribe();
+            } catch (e) {
+              this.ds.showToast(e)
+            }
           }
         }
       ]
@@ -86,6 +98,7 @@ export class QuestionPage {
     alert.present();
   }
 
+  //alert that confirms you want to indicate your question is unclear
   unclear() {
     let sure = this.ds.translateFunc('inq.sure');
     let mess = this.ds.translateFunc('inq.unans');
@@ -103,10 +116,14 @@ export class QuestionPage {
         {
           text: this.yes,
           handler: () => {
-            this.question.answered = false;
-            let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
-            this.Class.questions[index] = this.question;
-            this.ds.joinClass(this.Class._id, this.Class).subscribe();
+            try {
+              this.question.answered = false;
+              let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
+              this.Class.questions[index] = this.question;
+              this.ds.joinClass(this.Class._id, this.Class).subscribe();
+            } catch (e) {
+              this.ds.showToast(e)
+            }
           }
         }
       ]
@@ -114,22 +131,27 @@ export class QuestionPage {
     alert.present();
   }
 
+  //voting function
   upVote() {
-    if (this.like == false) {
-      this.question.votes.push(this.user)
-      //make this a function
-      let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
-      this.Class.questions[index] = this.question;
-      this.ds.joinClass(this.Class._id, this.Class).subscribe();
-      this.like = true
-    } else {
-      this.question.votes = _.pull(this.question.votes, this.user);
-      this.like = false
+    try {
+      if (this.like == false) {
+        this.question.votes.push(this.user)
+        //make this a function
+        let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
+        this.Class.questions[index] = this.question;
+        this.ds.joinClass(this.Class._id, this.Class).subscribe();
+        this.like = true
+      } else {
+        this.question.votes = _.pull(this.question.votes, this.user);
+        this.like = false
+      }
+    } catch (e) {
+      this.ds.showToast(e)
     }
   }
 
-  
 
+  //function used to remove a question or comment
   delete(ques, comm) {
     let type = this.ds.translateFunc(ques);
     let rem = this.ds.translateFunc('inq.title');
@@ -148,19 +170,21 @@ export class QuestionPage {
         {
           text: this.yes,
           handler: () => {
-            if (ques == 'Question') {
+            try {
+              if (ques == 'Question') {
 
-              _.remove(this.Class.questions, this.question)
-              console.log(this.Class.questions)
-              this.ds.joinClass(this.Class._id, this.Class).subscribe();
-              this.navCtrl.pop()
-            } else {
-              _.remove(this.question.comment, comm)
-              console.log(this.question.comment)
-              let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
-              this.Class.questions[index] = this.question;
-              this.ds.joinClass(this.Class._id, this.Class).subscribe();
-            }
+                _.remove(this.Class.questions, this.question)
+                console.log(this.Class.questions)
+                this.ds.joinClass(this.Class._id, this.Class).subscribe();
+                this.navCtrl.pop()
+              } else {
+                _.remove(this.question.comment, comm)
+                console.log(this.question.comment)
+                let index = _.indexOf(this.Class.questions, _.find(this.Class.questions, this.question));
+                this.Class.questions[index] = this.question;
+                this.ds.joinClass(this.Class._id, this.Class).subscribe();
+              }
+            } catch (e) { this.ds.showToast(e) }
           }
         }
       ]

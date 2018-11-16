@@ -8,18 +8,17 @@
 
   <ion-navbar color='primary'>
     <ion-row>
-      <ion-title *ngIf='!babel'>{{this.Class.name}}</ion-title>
-      <ion-title *ngIf='babel'>{{this.transTitle}}</ion-title>
+      <ion-title *ngIf='!babel'>{{this.Class.name}}</ion-title><!--Class title-->
+      <ion-title *ngIf='babel'>{{this.transTitle}}</ion-title><!--Translated class title-->
       <button ion-button (click)='showClass(this.Class);'>
         <ion-icon name="information-circle"></ion-icon>
       </button>
     </ion-row>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content >
+<ion-content>
+  <!-- Answered and unanswered sections-->
   <ion-segment *ngIf='this.questions.length !== 0 || this.questions == undefined' [(ngModel)]="state" color="primary">
     <ion-segment-button value="u">
       {{ 'class.U' | translate }}
@@ -29,11 +28,13 @@
     </ion-segment-button>
   </ion-segment>
 
+  <!-- This is what the user sees if the questions array is empty -->
   <div padding *ngIf='this.questions.length == 0 || this.questions.length == undefined'>
     <h3>{{ 'class.no' | translate }}</h3>
     <button (click)="postComment(undefined)" ion-button>{{ 'class.be' | translate }}</button>
   </div>
 
+  <!-- unanswered questions section -->
   <div *ngIf="this.state == 'u'">
     <div *ngFor='let item of questions'>
       <div *ngIf='!item.answered'>
@@ -48,16 +49,13 @@
               <ion-avatar item-start>
                 <ion-icon name="contact"></ion-icon>
               </ion-avatar>
-
               <h1>{{item.user}}</h1>
               <h1>{{item.topic}}</h1>
               <p>{{item.description}}</p>
-
             </div>
           </ion-item>
 
-
-          <!--ASK SOMEONE HOW TO DO DIS-->
+          <!--Like question function (vaulted due to bugs)-->
           <!-- <button ion-button (click)='upVote(item)'>
             <ion-icon *ngIf='item.votes' name="star-outline">
               <ion-badge item-end>{{item.votes.length}}</ion-badge>
@@ -70,11 +68,12 @@
             <ion-icon padding name="text">
             </ion-icon>
           </button>
-
         </ion-card>
       </div>
     </div>
   </div>
+
+  <!-- Answered questions section -->
   <div *ngIf="this.state == 'a'">
     <div *ngFor='let item of questions'>
       <div *ngIf='item.answered'>
@@ -87,7 +86,8 @@
             <h1>{{item.topic}}</h1>
             <p>{{item.description}}</p>
           </ion-item>
-          <!--ASK BHOLA HOW TO DO DIS-->
+
+          <!--VAULTED-->
           <!-- <button ion-button>
             <ion-icon padding name="arrow-dropup-circle">
               <ion-badge item-end>{{item.votes.length}}</ion-badge>
@@ -101,10 +101,11 @@
       </div>
     </div>
   </div>
+  
+  <!-- Button that adds new question  -->
   <ion-fab right bottom>
     <button ion-fab (click)="postComment(undefined)">
       <ion-icon name="add-circle"></ion-icon>
     </button>
   </ion-fab>
-
 </ion-content>

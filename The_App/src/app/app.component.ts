@@ -10,10 +10,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { UserPage } from '../pages/user/user';
 
-
 import { DataServiceProvider } from "../providers/data-service/data-service";
 import { Storage } from '@ionic/storage';
-
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -24,14 +22,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // make HelloIonicPage the root (or first) page
+  // make LoginPage the root (or first) page
   rootPage = LoginPage;
-  pages: Array<{ title: string, component: any }>;
   // public user = this.ds.cred
-  public user: any;
-  public test = 'test string';
-  // public lang = ['en','sp','fr','ch']
-  public lang = 'en';
+  public user: any;//Value that holds the user to display on the side menu
+  public lang = 'en';//language
 
   constructor(
     public platform: Platform,
@@ -42,98 +37,74 @@ export class MyApp {
     public event: Events,
     public storage: Storage,
     private translate: TranslateService,
-  
-    // public navCtrl: NavController
   ) {
-    
     this.initializeApp();
-    this.initTranslate(); 
+    this.initTranslate();
+    //event that runs in a successful login
     event.subscribe('user : logged in', (user) => {
-      this.user = user
-      this.nav.setRoot(HelloIonicPage)
-      console.log(JSON.stringify(user));
+      this.user = user //user is populated to side bar  
+      this.nav.setRoot(HelloIonicPage)//navigates to home page
     });
-
-
-    // set our app's pages
-    // this.pages = [
-    //   { title: 'Hello Ionic', component: HelloIonicPage },
-    //   { title: 'My First List', component: ListPage }
-    // ];
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+      //if there is no cashed user then the login page runs
       this.ds.getStuff().then(data => {
         if (data == null) {
           this.nav.setRoot(LoginPage)
         } else {
+          //if there is a cached user then this logs that user in
           let body = {
             userName: data.userInfo.userName,
             password: data.userInfo.password
           }
-          this.ds.test(body)
+          this.ds.preLogin(body)
         }
-        console.log(data)
       }
-      )
+      ), error =>{
+        console.log(error)
+      }
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-
-
-
-  }
-
-  openPage(page) {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
   }
 
   logout() {
+    //removes user from cache
     this.storage.remove('cred');
+    //send user back to the login
     this.nav.setRoot(LoginPage)
   }
 
-  edit() {
-    this.menu.close();
-    this.nav.push(UserPage, this.user)
-  }
-
-  // storageCheck(){
-  //   let cred 
-  //   this.storage.get('cred').subscribe( cred =>)
-  //   if(cred == null || undefined){
-  //     this.nav.setRoot(LoginPage)
-  //   }else {
-  //     this.nav.setRoot(HelloIonicPage)
-  //     this.ds.test(cred.userInfo)
-  //   }
+  //function to edit user info (vaulted for now due to password erros)
+  // edit() {
+  //   this.menu.close();
+  //   this.nav.push(UserPage, this.user)
   // }
 
-    initTranslate() {
+  initTranslate() {
+    try {
       // Set the default language for translation strings, and the current language.
       this.translate.setDefaultLang('en');
       this.ds.lang = 'en';
       if (this.translate.getBrowserLang() !== undefined) {
-          this.translate.use(this.translate.getBrowserLang());
+        this.translate.use(this.translate.getBrowserLang());
       } else {
-          this.translate.use('en'); // Set your language here
+        this.translate.use('en'); // Set your language here
       }
-
-    
-
+    }
+    catch (e) { this.ds.showToast(e) }
   }
 
-  public changeLanguage(language)
-  {
-    console.log(language)
+  public changeLanguage(language) {
+    try{
     this.translate.use(language);
-    this.ds.lang = language 
+    //stores the current language the app is set to in the data service
+    this.ds.lang = language
+    } catch (e) { this.ds.showToast(e) }
   }
 
 

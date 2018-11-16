@@ -6,7 +6,6 @@ import _ from 'lodash';
 import { ItemDetailsPage } from '../item-details/item-details';
 import { ListPage } from '../list/list';
 
-
 /**
  * Generated class for the ClassIPage page.
  *
@@ -19,8 +18,8 @@ import { ListPage } from '../list/list';
   templateUrl: 'class-i.html',
 })
 export class ClassIPage {
-  private info: any;
-  private user: any;
+  private info: any;//Class info
+  private user: any;//logged in user username
   constructor(public navCtrl: NavController, public navParams: NavParams, private ds: DataServiceProvider, private alertCtrl: AlertController,
     public viewCtrl: ViewController) {
     this.info = this.navParams.data;
@@ -33,6 +32,7 @@ export class ClassIPage {
     console.log('ionViewDidLoad ClassIPage');
   }
 
+  // removing the user from the students array and popping them from the class
   leaveClass() {
     let sure = this.ds.translateFunc('info.sure')
     let yes = this.ds.translateFunc('yes')
@@ -51,12 +51,13 @@ export class ClassIPage {
         {
           text: yes,
           handler: () => {
-
-            _.pull(this.info.students, this.user);
-            this.ds.joinClass(this.info._id, this.info).subscribe();
-            //NB Fix this b4 u done This has to pop to root when the student is deleted but it giving the removeview error
-            this.viewCtrl.dismiss(this.info)
-            // this.navCtrl.popToRoot();
+            try {
+              _.pull(this.info.students, this.user);
+              this.ds.joinClass(this.info._id, this.info).subscribe();
+              this.viewCtrl.dismiss(this.info)
+            } catch (e) {
+              this.ds.showToast(e)
+            }
           }
         }
       ]
@@ -64,17 +65,24 @@ export class ClassIPage {
     alert.present();
   }
 
+  //pushes page that adds students
   addStudents() {
     this.navCtrl.push(ItemDetailsPage, this.info)
   }
 
-  editClass(){
+  //pushes page that edits class info
+  editClass() {
     this.navCtrl.push(ListPage, this.info)
   }
 
-  delete(){
+  // deletes the class from the database
+  delete() {
+    try {
     let secret = 'COLGATE'
     this.ds.delete(this.info).subscribe()
     this.viewCtrl.dismiss(secret)
+    } catch (e) {
+      this.ds.showToast(e)
+    }
   }
 }
