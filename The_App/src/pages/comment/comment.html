@@ -16,11 +16,10 @@
         ion-button [disabled]="!post.valid">{{ 'post.post' | translate }}</button>
     </ion-row>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+  <!-- modal form that posts either questions or comments -->
   <form [formGroup]="post">
     <ion-item *ngIf='this.question == undefined'>
       <ion-label>{{ 'subject' | translate }}</ion-label>

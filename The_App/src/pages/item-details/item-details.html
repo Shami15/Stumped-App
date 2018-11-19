@@ -1,13 +1,11 @@
 <ion-header>
   <ion-navbar color='primary'>
-    <!-- <button menuToggle *ngIf="!selectedItem">
-      <ion-icon name="menu"></ion-icon>
-    </button> -->
     <ion-title>{{ 'info.add' | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <!-- Similar search and add form that adds users to the students array of the class object -->
     <ion-item (click)='collapsible()'>
     <ion-icon item-left *ngIf='!this.expand' name="add"></ion-icon>
     <ion-icon item-left *ngIf='this.expand' name="remove"></ion-icon>

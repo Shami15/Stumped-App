@@ -5,15 +5,13 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar color='primary'>
     <ion-title>{{ 'add.add' | translate }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
+  <!-- Switching between the join class and the add class forms -->
   <ion-segment [(ngModel)]="state" color="primary">
     <ion-segment-button value="u">
       {{ 'add.create' | translate }}
@@ -23,8 +21,8 @@
     </ion-segment-button>
   </ion-segment>
 
+  <!-- Add Class section -->
   <div padding *ngIf="this.state == 'u'">
-
     <form [formGroup]="class" (ngSubmit)="submitClass(this.class)">
       <ion-item>
         <ion-label>{{ 'add.name' | translate }}</ion-label>
@@ -47,6 +45,7 @@
           <ion-option value="zh">{{ 'lang.ch' | translate }}</ion-option>
         </ion-select>
       </ion-item>
+      <!-- This is the collapsible list of students you have added to the class -->
       <ion-item (click)='collapsible()'>
         <ion-icon item-left *ngIf='!this.expand' name="add"></ion-icon>
         <ion-icon item-left *ngIf='this.expand' name="remove"></ion-icon>
@@ -58,24 +57,21 @@
         </h6>
       </div>
       <ion-searchbar (ionInput)="onInput($event)" [debounce]='500'></ion-searchbar>
+      <!-- Shows the user that has been found in the database -->
       <ion-card *ngIf='this.searchVal?.userName' (click)='addUser();'>
         <ion-row>
           <ion-icon padding name="contact"></ion-icon>
           <h1 padding>{{this.searchVal?.userName}}</h1>
         </ion-row>
       </ion-card>
-      <!-- <ion-item>
-        <ion-textarea readonly='true' formControlName="students" [(ngModel)]="this.students"></ion-textarea>
-      </ion-item> -->
-
       <button ion-button type="submit" block [disabled]="!class.valid">{{ 'add.create' | translate }}</button>
     </form>
   </div>
 
+  <!-- Join Class section -->
   <div padding *ngIf="this.state == 'a'">
     <form (ngSubmit)="joinClass()">
       <h4>{{ 'add.id' | translate }}</h4>
-      <!-- <ion-input type="number" formControlName="ID" (ionInput)="searchClass($event)" [debounce]='500'> -->
       <ion-searchbar (ionInput)="searchClass($event)" [debounce]='500'></ion-searchbar>
       <ion-card *ngIf='this.classVal?.name' (click)='joinClass();'>
         <ion-row>
@@ -85,6 +81,4 @@
       </ion-card>
     </form>
   </div>
-
-
 </ion-content>

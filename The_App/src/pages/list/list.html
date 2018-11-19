@@ -1,27 +1,26 @@
 <ion-header>
   <ion-navbar color='primary'>
     <!-- <ion-title>Change Password</ion-title> -->
-    <ion-title>Edit Class</ion-title>
+    <ion-title>{{ 'info.edit' | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
   <form [formGroup]="edit" (ngSubmit)='editClass(this.edit)'>
     <ion-item>
-      <ion-label>Class Name</ion-label>
+      <ion-label>{{ 'add.name' | translate}}</ion-label>
       <ion-input formControlName='name'> </ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Subject</ion-label>
+      <ion-label>{{ 'subject' | translate}}</ion-label>
       <ion-input formControlName='subject'> </ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Description</ion-label>
+      <ion-label>{{ 'add.desc' | translate}}</ion-label>
       <ion-input formControlName='name'> </ion-input>
     </ion-item>
 
-    <button ion-button type='submit' block> Edit Class </button>
+    <button ion-button type='submit' block>{{ 'info.edit' | translate}}</button>
 
   </form>
 

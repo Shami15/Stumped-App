@@ -12,6 +12,7 @@
 
 </ion-header>
 <ion-content padding>
+  <!-- shows question -->
   <ion-item>
     <ion-avatar item-start>
       <ion-icon name="contact"></ion-icon>
@@ -23,10 +24,9 @@
       <h1>{{this.question.user}}</h1>
       <h2><u>{{this.question.topic}}</u></h2>
       <h1>{{this.question.description}}</h1>
-
     </div>
   </ion-item>
-
+  <!-- voting button -->
   <div>
     <button ion-button (click)="upVote()">
       <ion-icon *ngIf='!this.like' name="star-outline">
@@ -43,9 +43,7 @@
       <ion-icon name="help"></ion-icon>
     </button>
 
-
-    <!-- <button ><ion-icon  padding name="text" >
-        </ion-icon></button>-->
+  <!-- list of comments -->
   </div>
   <div *ngFor='let item of comments;'>
     <ion-item>
@@ -60,7 +58,7 @@
         <p>{{item.text}}</p>
     </ion-item>
     <div>
-      <!-- HERE!!! -->
+      <!-- Votes button for comments-->
         <!-- <button ion-button (click)="upVote()">
             <ion-icon name="star-outline">
               <ion-badge item-end>{{item.votes.length}}</ion-badge>
@@ -69,8 +67,6 @@
               <ion-badge item-end>{{item.votes.length}}</ion-badge>
             </ion-icon>
           </button> -->
-
-
       <!-- <button ion-button color="secondary" *ngIf='this.question.user == this.user'>
           <ion-icon name="help"></ion-icon>
         </button> -->

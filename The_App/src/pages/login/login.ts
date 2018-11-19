@@ -65,7 +65,7 @@ export class LoginPage {
         userName: user.value.userName,
         password: user.value.password
       };
-      this.ds.test(body)
+      this.ds.preLogin(body)
     } catch (e) {
       this.ds.showToast(e)
     }
@@ -96,17 +96,6 @@ export class LoginPage {
       this.loading.dismiss();
     }, 2500);
   }
-
-  // showError(text) {
-  //   this.loading.dismiss();
-  //   let toast = this.toastCtrl.create({
-  //     message: text,
-  //     duration: 3000,
-  //     position: 'top'
-  //   });
-  //   toast.present();
-
-  // }
 
   //function that switches the forms
   switch() {
