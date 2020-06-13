@@ -16,13 +16,13 @@ var morgan      = require('morgan');
 var mongoose    = require('mongoose');
 var jwt         = require('jwt-simple');
 
-
 // use sessions for tracking logins
 // app.use(session({
 //     secret: 'work hard',
 //     resave: true,
 //     saveUninitialized: false
 //   }));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
