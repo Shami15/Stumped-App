@@ -39,7 +39,7 @@
     "cordova-sqlite-storage": "^2.5.0",
     "google-translate-api": "^2.3.0",
     "google-translate-token": "^1.0.0",
-    "got": "^9.3.2",
+    "got": "^11.8.5",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "node-fetch": "^2.3.0",
